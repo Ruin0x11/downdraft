@@ -161,12 +161,11 @@ Formatted with `format-seconds'."
           (setq buffer-undo-tree nil))
       (downdraft-stop)
       (downdraft-kill-save-buffer t)
-      (setq downdraft-buffer nil)
       (message "Time expired."))))
 
 (defun downdraft-finish ()
-  (message "Drafting finished!")
-  (downdraft-stop))
+  (downdraft-stop)
+  (message "Drafting finished!"))
 
 (defun downdraft-clear-overlay ()
   (remove-overlays nil nil 'downdraft-marker t))
@@ -234,6 +233,7 @@ Formatted with `format-seconds'."
   (cancel-timer downdraft-timer)
   (downdraft-clear-overlay)
   (setq downdraft-mode-line-string "")
+  (setq downdraft-buffer nil)
   (force-mode-line-update)
   (run-hooks 'downdraft-stop-hook))
 
